@@ -25,7 +25,6 @@ const Customer = (props) =>{
                         </Menu.Item>
                         <Menu.Item key="2" icon={<ShoppingCartOutlined />}>Order</Menu.Item>
                         <Menu.Item key="3" icon={<FormatPainterOutlined />}>Product</Menu.Item>
-
                     </Menu>
                 </Sider>
                 <Layout style={{ padding: '0 24px 24px' }}>
