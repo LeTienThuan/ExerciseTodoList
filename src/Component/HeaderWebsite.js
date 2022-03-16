@@ -7,7 +7,7 @@ import '../CSS/HeaderWebsite.css';
 const HeaderWebsite = () => {
     return (
         <Header className="header">
-            <Title  level={2}>Shopping Management</Title>
+            <Title level={3}>Shopping Management</Title>
         </Header>
     );
 };

@@ -1,6 +1,6 @@
 const Product = (props) =>{
-    return (<div>
-
-    </div>)
+    return (<h2>
+        Product
+    </h2>)
 }
 export default  Product

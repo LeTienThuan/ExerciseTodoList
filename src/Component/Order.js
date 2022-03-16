@@ -1,6 +1,8 @@
-const Order = (props) =>{
-    return (<div>
 
-    </div>)
+const Order = (props) =>{
+
+    return (<h2>
+        Order
+    </h2>)
 }
 export default  Order

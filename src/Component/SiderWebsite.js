@@ -16,8 +16,12 @@ const SiderWebsite = () => {
                 <Menu.Item key="1" icon={<UsergroupDeleteOutlined/>}>
                     <Link to='/customer'>Customer</Link>
                 </Menu.Item>
-                <Menu.Item key="2" icon={<ShoppingCartOutlined/>}>Order</Menu.Item>
-                <Menu.Item key="3" icon={<FormatPainterOutlined/>}>Product</Menu.Item>
+                <Menu.Item key="2" icon={<ShoppingCartOutlined/>}>
+                    <Link to='/order'>Order</Link>
+                </Menu.Item>
+                <Menu.Item key="3" icon={<FormatPainterOutlined/>}>
+                    <Link to='/product'>Product</Link>
+                </Menu.Item>
             </Menu>
         </Sider>
     );
