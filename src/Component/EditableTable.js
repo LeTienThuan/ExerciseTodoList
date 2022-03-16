@@ -32,7 +32,7 @@ const EditableTable = () =>{
                     <Button type='primary'
                             danger={true}
                             icon={<DeleteOutlined />}
-                            onClick={handleDeleteCustomer}
+                            onClick={() =>handleDeleteCustomer(record.key)}
                     >
                         Delete
                     </Button>
