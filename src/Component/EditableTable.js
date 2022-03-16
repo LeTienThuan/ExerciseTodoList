@@ -1,84 +1,69 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'antd/dist/antd.css';
 import '../CSS/EditableTable.css'
-import {Button, Space, Table, Tag} from "antd";
-import {UserAddOutlined} from "@ant-design/icons";
+import {Button, Space, Table} from "antd";
+import {DeleteOutlined, EditOutlined, UserAddOutlined} from "@ant-design/icons";
+import {listCustomer} from "../DefaultValue/DefaultValue";
 
 
-const columns = [
-    {
-        title: 'Name',
-        dataIndex: 'name',
-        key: 'name',
-    },
-    {
-        title: 'Age',
-        dataIndex: 'age',
-        key: 'age',
-    },
-    {
-        title: 'Address',
-        dataIndex: 'address',
-        key: 'address',
-    },
-    {
-        title: 'Tags',
-        key: 'tags',
-        dataIndex: 'tags',
-        render: tags => (
-            <>
-                {tags.map(tag => {
-                    let color = tag.length > 5 ? 'geekblue' : 'green';
-                    if (tag === 'loser') {
-                        color = 'volcano';
-                    }
-                    return (
-                        <Tag color={color} key={tag}>
-                            {tag.toUpperCase()}
-                        </Tag>
-                    );
-                })}
-            </>
-        ),
-    },
-    {
-        title: 'Action',
-        key: 'action',
-        render: (text, record) => (
-            <Space size="middle">
-                <a>Invite {record.name}</a>
-                <a>Delete</a>
-            </Space>
-        ),
-    },
-];
-const data = [
-    {
-        key: '1',
-        name: 'John Brown',
-        age: 32,
-        address: 'New York No. 1 Lake Park',
-        tags: ['nice', 'developer'],
-    },
-    {
-        key: '2',
-        name: 'Jim Green',
-        age: 42,
-        address: 'London No. 1 Lake Park',
-        tags: ['loser'],
-    },
-    {
-        key: '3',
-        name: 'Joe Black',
-        age: 32,
-        address: 'Sidney No. 1 Lake Park',
-        tags: ['cool', 'teacher'],
-    },
-];
 const EditableTable = () =>{
+    const columns = [
+        {
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
+        },
+        {
+            title: 'Age',
+            dataIndex: 'age',
+            key: 'age',
+        },
+        {
+            title: 'Address',
+            dataIndex: 'address',
+            key: 'address',
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (text, record) => (
+                <Space size="middle">
+                    <Button type='primary' icon={<EditOutlined/>}>Edit</Button>
+                    <Button type='primary'
+                            danger={true}
+                            icon={<DeleteOutlined />}
+                            onClick={handleDeleteCustomer}
+                    >
+                        Delete
+                    </Button>
+                </Space>
+            ),
+        },
+    ];
+
+    const [dataCustomer, setDataCustomer] = useState(listCustomer);
+
+    const handleAddCustomer = () =>{
+        setDataCustomer([...dataCustomer,     {
+            key: Math.random().toFixed(3),
+            name: '',
+            age: 0,
+            address: '',
+        }])
+    }
+    const handleDeleteCustomer = (key) =>{
+        const newCustomersList = dataCustomer.filter((customer) =>{
+            return customer.key !== key;
+        });
+        setDataCustomer(newCustomersList);
+    }
     return  <>
-                <Button type="primary" icon={<UserAddOutlined />}>Add Customer</Button>
-                <Table dataSource={data} columns={columns} />
+                <Button type="primary"
+                        icon={<UserAddOutlined />}
+                        style={{marginBottom: 20}}
+                        onClick={handleAddCustomer}>Add Customer</Button>
+                <Table dataSource={dataCustomer}
+                       columns={columns} />
             </>;
 };
 

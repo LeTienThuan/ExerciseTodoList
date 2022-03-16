@@ -5,23 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab581b9b-bd74-4450-af9e-1983c83a5c1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/CSS/ContentWebsite.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/CSS/EditableTable.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Component/ContentWebsite.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Component/EditableTable.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/DefaultValue/DefaultValue.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CSS/HeaderWebsite.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/CSS/HeaderWebsite.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Customer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Customer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/HeaderWebsite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/HeaderWebsite.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Order.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Order.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/Product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Product.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/SiderWebsite.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/SiderWebsite.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/EditableTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/EditableTable.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -70,7 +69,7 @@
       <workItem from="1647312092043" duration="6625000" />
       <workItem from="1647328808478" duration="10539000" />
       <workItem from="1647339833759" duration="56000" />
-      <workItem from="1647395270134" duration="18870000" />
+      <workItem from="1647395270134" duration="23203000" />
     </task>
     <servers />
   </component>

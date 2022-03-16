@@ -8,7 +8,6 @@ import Order from "./Component/Order";
 import Product from "./Component/Product";
 import EditableTable from "./Component/EditableTable";
 
-
 const App = () => {
     return (
         <Layout>
