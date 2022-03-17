@@ -6,7 +6,7 @@ import ContentWebsite from "./Component/ContentWebsite";
 import {Redirect, Route, Switch} from "react-router-dom";
 import Order from "./Component/Order";
 import Product from "./Component/Product";
-import EditableTable from "./Component/EditableTable";
+import Customer from "./Component/Customer";
 
 const App = () => {
     return (
@@ -20,7 +20,7 @@ const App = () => {
                            <Redirect to={'/customer'}/>
                         </Route>
                         <Route  path='/customer'>
-                            <EditableTable/>
+                            <Customer/>
                         </Route>
                         <Route path='/order'>
                             <Order/>
