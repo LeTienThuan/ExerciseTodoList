@@ -15,7 +15,7 @@ const ModalAddCustomer = (props) => {
         await form.validateFields();
         form.submit();
         message.success('Add Successfully');
-        onAddCustomer(form.getFieldsValue())
+        onAddCustomer(form.getFieldsValue());
         form.resetFields();
         setIsModalVisible(false);
     };
@@ -38,7 +38,6 @@ const ModalAddCustomer = (props) => {
             >
                 <FormCustomer form={form} />
             </Modal>
-
         </>
     );
 };

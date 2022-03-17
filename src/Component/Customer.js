@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import 'antd/dist/antd.css';
 import '../CSS/EditableTable.css'
 import {Button, Space, Table} from "antd";
-import {DeleteOutlined} from "@ant-design/icons";
+import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {listCustomer} from "../DefaultValue/DefaultValue";
-import ModalAddCustomer from "./ModalAddCustomer";
-import ModalEditCustomer from "./ModalEditCustomer";
+import ModalCustomer from "./ModalCustomer";
 
 let customerKey = 4;
 
@@ -30,8 +29,14 @@ const Customer = () =>{
             title: 'Action',
             key: 'action',
             render: (text, record) => (
+
                 <Space size="middle">
-                    <ModalEditCustomer onEditCustomer={handleEditCustomer} record={record}/>
+                    <Button type='primary'
+                            icon={<EditOutlined/>}
+                            onClick={() => setModel({visible: true, customer: record})}
+                    >
+                        Edit
+                    </Button>
                     <Button type='primary'
                             danger={true}
                             icon={<DeleteOutlined />}
@@ -45,6 +50,11 @@ const Customer = () =>{
     ];
 
     const [dataCustomer, setDataCustomer] = useState(listCustomer);
+    const [model, setModel] = useState({
+        visible: false,
+        customer: {},
+
+    });
 
     const handleAddCustomer = (newCustomer) =>{
         setDataCustomer([...dataCustomer, {key: customerKey, ...newCustomer}])
@@ -63,7 +73,10 @@ const Customer = () =>{
         setDataCustomer(newCustomersList);
     }
     return  <>
-                <ModalAddCustomer onAddCustomer={handleAddCustomer}/>
+                <Button type="primary" style={{marginBottom: '20px'}} onClick={() => setModel({visible: true})}>Add New Customer</Button>
+                <ModalCustomer model={model}
+
+                />
                 <Table dataSource={dataCustomer}
                        columns={columns} />
             </>;
