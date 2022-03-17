@@ -53,8 +53,8 @@ const Customer = () =>{
     const [model, setModel] = useState({
         visible: false,
         customer: {},
-
     });
+
 
     const handleAddCustomer = (newCustomer) =>{
         setDataCustomer([...dataCustomer, {key: customerKey, ...newCustomer}])
@@ -73,8 +73,8 @@ const Customer = () =>{
         setDataCustomer(newCustomersList);
     }
     return  <>
-                <Button type="primary" style={{marginBottom: '20px'}} onClick={() => setModel({visible: true})}>Add New Customer</Button>
-                <ModalCustomer model={model}
+                <Button type="primary" style={{marginBottom: '20px'}} onClick={() => setModel({...model,visible: true})}>Add New Customer</Button>
+                <ModalCustomer  model={model}
 
                 />
                 <Table dataSource={dataCustomer}

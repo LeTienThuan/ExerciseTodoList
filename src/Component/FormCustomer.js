@@ -26,7 +26,6 @@ const FormCustomer = (props) => {
 
 
     const {name = '', age = 0, address = ''} = customer;
-    console.log(name)
     useEffect(() => {
         form.setFieldsValue({name, age, address})
     }, [customer]);
