@@ -23,7 +23,7 @@ const validateMessages = {
 /* eslint-disable no-template-curly-in-string */
 const FormCustomer = (props) => {
     const {record = {}, form} = props;
-    const {name = 'name', age = 0, address = 'address'} = record;
+    const {name = '', age = 0, address = ''} = record;
 
     useEffect(() => {
         form.setFieldsValue({name, age, address})

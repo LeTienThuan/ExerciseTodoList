@@ -30,7 +30,6 @@ const Customer = () =>{
             title: 'Action',
             key: 'action',
             render: (text, record) => (
-
                 <Space size="middle">
                     <ModalEditCustomer onEditCustomer={handleEditCustomer} record={record}/>
                     <Button type='primary'
