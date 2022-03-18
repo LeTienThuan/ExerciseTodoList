@@ -6,10 +6,7 @@ let customerKey = 4;
 
 const ModalCustomer = (props) => {
     const {model = {}, onSaveData, onUpdateData} = props;
-    const {
-        visible = false, customer = {}, title = '', onCancel = () => {
-        }
-    } = model;
+    const {visible = false, customer = {}, title = '', inform='', onCancel = () => {}} = model;
     const [form] = Form.useForm()
 
     const handleChangeData = async () => {
@@ -17,7 +14,7 @@ const ModalCustomer = (props) => {
         customer?.key
             ? onUpdateData({...form.getFieldsValue(), key: customer.key})
             : onSaveData({...form.getFieldsValue(), key: customerKey++});
-        message.success('...')
+        message.success(inform);
         form.resetFields();
         onCancel();
     }

@@ -5,13 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ab581b9b-bd74-4450-af9e-1983c83a5c1e" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Component/ModalProduct.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Component/FormProduct.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/Customer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Customer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/FormCustomer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/FormCustomer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ModalAddCustomer.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/ModalCustomer.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ModalCustomer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Component/ModalEditCustomer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Component/ModalProduct.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/ModalProduct.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Component/Product.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Component/Product.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/DefaultValue/DefaultValue.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/DefaultValue/DefaultValue.js" afterDir="false" />
     </list>
@@ -84,7 +84,7 @@
       <workItem from="1647339833759" duration="56000" />
       <workItem from="1647395270134" duration="24149000" />
       <workItem from="1647481986005" duration="27425000" />
-      <workItem from="1647568021645" duration="12012000" />
+      <workItem from="1647568021645" duration="23794000" />
     </task>
     <servers />
   </component>

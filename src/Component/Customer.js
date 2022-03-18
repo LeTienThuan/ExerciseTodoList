@@ -36,6 +36,7 @@ const Customer = () => {
                                 ...model,
                                 visible: true,
                                 customer: record,
+                                inform: 'Edit Successfully',
                                 title: 'Edit Customer'
                             })}
                     >
@@ -57,6 +58,7 @@ const Customer = () => {
     const [model, setModel] = useState({
         visible: false,
         customer: {},
+        inform:'',
         title: '',
         onCancel: () => {
             setModel({...model, visible: false});
@@ -88,7 +90,10 @@ const Customer = () => {
     return (<>
         <Button type="primary"
                 style={{marginBottom: '20px'}}
-                onClick={() => setModel({...model, visible: true, title: 'Add New Customer'})}
+                onClick={() => setModel({...model,
+                                                visible: true,
+                                                title: 'Add New Customer',
+                                                inform: 'Add Successfully',})}
         >
             Add New Customer
         </Button>
