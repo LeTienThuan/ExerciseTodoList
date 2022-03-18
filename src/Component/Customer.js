@@ -6,9 +6,8 @@ import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {listCustomer} from "../DefaultValue/DefaultValue";
 import ModalCustomer from "./ModalCustomer";
 
-let customerKey = 4;
 
-const Customer = () =>{
+const Customer = () => {
     const columns = [
         {
             title: 'Name',
@@ -33,14 +32,19 @@ const Customer = () =>{
                 <Space size="middle">
                     <Button type='primary'
                             icon={<EditOutlined/>}
-                            onClick={() => setModel({visible: true, customer: record})}
+                            onClick={() => setModel({
+                                ...model,
+                                visible: true,
+                                customer: record,
+                                title: 'Edit Customer'
+                            })}
                     >
                         Edit
                     </Button>
                     <Button type='primary'
                             danger={true}
-                            icon={<DeleteOutlined />}
-                            onClick={() =>handleDeleteCustomer(record)}
+                            icon={<DeleteOutlined/>}
+                            onClick={() => handleDeleteCustomer(record)}
                     >
                         Delete
                     </Button>
@@ -53,33 +57,47 @@ const Customer = () =>{
     const [model, setModel] = useState({
         visible: false,
         customer: {},
+        title: '',
+        onCancel: () => {
+            setModel({...model, visible: false});
+        },
     });
 
-
-    const handleAddCustomer = (newCustomer) =>{
-        setDataCustomer([...dataCustomer, {key: customerKey, ...newCustomer}])
-        customerKey++;
-    }
-    const handleEditCustomer = (newRecord) =>{
-        const newData = dataCustomer.map(data =>{
-          return  data.key === newRecord.key ?  {...data, ...newRecord} : data;
-        })
+    const onSaveData = (record) => {
+        const newData = [...dataCustomer];
+        newData.push(record);
         setDataCustomer(newData);
+        setModel({...model, visible: false})
     }
-    const handleDeleteCustomer = (record) =>{
-        const newCustomersList = dataCustomer.filter((customer) =>{
+
+    const onUpdateData = (record) => {
+        const index = dataCustomer.findIndex(data => data.key === record.key);
+        const newData = [...dataCustomer];
+        newData[index] = record;
+        setDataCustomer(newData);
+        setModel({...model, visible: false})
+    }
+
+    const handleDeleteCustomer = (record) => {
+        const newCustomersList = dataCustomer.filter((customer) => {
             return customer.key !== record.key;
         });
         setDataCustomer(newCustomersList);
     }
-    return  <>
-                <Button type="primary" style={{marginBottom: '20px'}} onClick={() => setModel({...model,visible: true})}>Add New Customer</Button>
-                <ModalCustomer  model={model}
 
-                />
-                <Table dataSource={dataCustomer}
-                       columns={columns} />
-            </>;
+    return (<>
+        <Button type="primary"
+                style={{marginBottom: '20px'}}
+                onClick={() => setModel({...model, visible: true, title: 'Add New Customer'})}
+        >
+            Add New Customer
+        </Button>
+        <ModalCustomer model={model}
+                       onSaveData={onSaveData} onUpdateData={onUpdateData}
+        />
+        <Table dataSource={dataCustomer}
+               columns={columns}/>
+    </>);
 };
 
 export default Customer;

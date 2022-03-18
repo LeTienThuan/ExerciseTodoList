@@ -1,14 +1,36 @@
 import React from 'react';
-import {Form, Modal} from "antd";
+import {Form, message, Modal} from "antd";
 import FormCustomer from "./FormCustomer";
 
+let customerKey = 4;
+
 const ModalCustomer = (props) => {
-    const {model={}, onCancel} = props;
-    const {visible=false, customer={}} = model;
+    const {model = {}, onSaveData, onUpdateData} = props;
+    const {
+        visible = false, customer = {}, title = '', onCancel = () => {
+        }
+    } = model;
     const [form] = Form.useForm()
+
+    const handleChangeData = async () => {
+        await form.validateFields();
+        customer?.key
+            ? onUpdateData({...form.getFieldsValue(), key: customer.key})
+            : onSaveData({...form.getFieldsValue(), key: customerKey++});
+        message.success('...')
+        form.resetFields();
+        onCancel();
+    }
+
     return (
-        <Modal visible={visible} onCancel={onCancel}>
-            <FormCustomer customer={customer} form={form} />
+        <Modal visible={visible}
+               onCancel={onCancel}
+               onOk={handleChangeData}
+               title={title}
+        >
+            <FormCustomer customer={customer}
+                          form={form}
+            />
         </Modal>
     );
 };
