@@ -22,12 +22,13 @@ const validateMessages = {
 };
 /* eslint-disable no-template-curly-in-string */
 const FormCustomer = (props) => {
-    const {record = {}, form} = props;
-    const {name = 'name', age = 0, address = 'address'} = record;
+    const {customer = {}, form} = props;
+    const {name = '', age = 0, address = ''} = customer;
 
     useEffect(() => {
         form.setFieldsValue({name, age, address})
-    }, [record]);
+    }, [customer]);
+
 
     return (
         <Form {...layout}
@@ -36,13 +37,13 @@ const FormCustomer = (props) => {
               name="nest-messages"
               validateMessages={validateMessages}
         >
-            <Form.Item name={'name'} label="Name" rules={[{required: true}]}>
+            <Form.Item name='name' label="Name" rules={[{required: true}]}>
                 <Input/>
             </Form.Item>
-            <Form.Item name={'age'} label="Age" rules={[{required: true, type: 'number', min: 0, max: 99}]}>
+            <Form.Item name='age' label="Age" rules={[{required: true, type: 'number', min: 0, max: 99}]}>
                 <InputNumber/>
             </Form.Item>
-            <Form.Item name={'address'} label="Address" rules={[{required: true}]}>
+            <Form.Item name='address' label="Address" rules={[{required: true}]}>
                 <Input/>
             </Form.Item>
         </Form>
