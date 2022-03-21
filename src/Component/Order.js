@@ -1,8 +1,11 @@
+import {Button} from "antd";
 
 const Order = (props) =>{
 
-    return (<h2>
-        Order
-    </h2>)
+    return (<>
+                <Button>
+
+                </Button>
+            </>)
 }
 export default  Order
