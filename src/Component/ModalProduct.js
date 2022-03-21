@@ -3,7 +3,6 @@ import {Form, Modal} from "antd";
 import FormProduct from "./FormProduct";
 import moment from "moment";
 
-let productKey = 4;
 
 const ModalProduct = (props) => {
     const [form] = Form.useForm();
@@ -25,8 +24,7 @@ const ModalProduct = (props) => {
             ? onUpdateData(record)
             : onSaveData({
                 ...form.getFieldsValue(),
-                expiredDate,
-                key: productKey++
+                expiredDate
             });
         form.resetFields();
         onCancel();

@@ -1,8 +1,8 @@
 import {Button, Space, Table} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
-import React, {useState} from "react";
-import {listProduct} from "../DefaultValue/DefaultValue";
+import React, {useEffect, useState} from "react";
 import ModalProduct from "./ModalProduct";
+import {addProduct, deleteProduct, editProduct} from "../API/requestProduct";
 
 const formatter = new Intl.NumberFormat('vi-VN', {
     style: 'currency',
@@ -56,6 +56,7 @@ const Product = () => {
                     <Button type='primary'
                             danger={true}
                             icon={<DeleteOutlined/>}
+                            onClick={() => handleDeleteData(record['key'])}
                     >
                         Delete
                     </Button>
@@ -64,7 +65,8 @@ const Product = () => {
         },
     ];
 
-    const [dataProduct, setDataProduct] = useState(listProduct);
+    const [dataProduct, setDataProduct] = useState([]);
+    const [statusData, setStatusData] = useState(Math.random());
     const [model, setModel] = useState({
         visible: false,
         product: {},
@@ -74,20 +76,43 @@ const Product = () => {
             setModel({...model, visible: false});
         },
     });
-    console.log(localStorage.getItem('dataProduct'))
-    const handleSaveData = (record) => {
-        const newData = [...dataProduct];
-        newData.push(record);
-        setDataProduct(newData);
+
+    useEffect(() => {
+        const fetchProduct = async () => {
+            const response = await fetch('https://managershopping-dca9a-default-rtdb.firebaseio.com/products.json');
+            const responseData = await response.json();
+
+            const loadedProducts = [];
+
+            for (const key in responseData) {
+                loadedProducts.push({
+                    key: key,
+                    name: responseData[key].name,
+                    trademark: responseData[key].trademark,
+                    expiredDate: responseData[key].expiredDate,
+                    price: responseData[key].price
+                })
+            }
+            setDataProduct(loadedProducts);
+        }
+        fetchProduct();
+    }, [statusData])
+
+    const handleSaveData = async (record) => {
+        await addProduct(record);
+        setStatusData(Math.random())
         setModel({...model, visible: false})
     }
 
-    const handleUpdateData = (record) => {
-        const index = dataProduct.findIndex(data => data.key === record.key);
-        const newData = [...dataProduct];
-        newData[index] = record;
-        setDataProduct(newData);
-        setModel({...model, visible: false})
+    const handleUpdateData = async (record) => {
+        const {key, ...newRecord} = record;
+        await editProduct(key, newRecord);
+        setStatusData(Math.random());
+        setModel({...model, visible: false});
+    }
+    const handleDeleteData = async (key) => {
+        await deleteProduct(key)
+        setStatusData(Math.random())
     }
 
     return (<>
