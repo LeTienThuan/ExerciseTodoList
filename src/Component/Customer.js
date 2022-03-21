@@ -3,8 +3,8 @@ import 'antd/dist/antd.css';
 import '../CSS/EditableTable.css'
 import {Button, Space, Table} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
-import {listCustomer} from "../DefaultValue/DefaultValue";
 import ModalCustomer from "./ModalCustomer";
+import {addCustomer, deleteCustomer, editCustomer} from "../API/requestCustomer";
 
 
 const Customer = () => {
@@ -45,7 +45,7 @@ const Customer = () => {
                     <Button type='primary'
                             danger={true}
                             icon={<DeleteOutlined/>}
-                            onClick={() => handleDeleteCustomer(record)}
+                            onClick={() => handleDeleteCustomer(record['key'])}
                     >
                         Delete
                     </Button>
@@ -55,6 +55,7 @@ const Customer = () => {
     ];
 
     const [dataCustomer, setDataCustomer] = useState([]);
+    const [statusData, setStatusData] = useState(Math.random());
     const [model, setModel] = useState({
         visible: false,
         customer: {},
@@ -67,82 +68,62 @@ const Customer = () => {
 
     useEffect(() => {
         const fetchCustomer = async () => {
-            const response = await fetch('https://managershopping-dca9a-default-rtdb.firebaseio.com/customer.json');
-            console.log(response)
+            const response = await fetch('https://managershopping-dca9a-default-rtdb.firebaseio.com/customers.json');
             const responseData = await response.json();
 
-            const loadCustomer = [];
+            const loadedCustomer = [];
 
             for (const key in responseData) {
-                loadCustomer.push({
-                    key: responseData[key].key,
+                loadedCustomer.push({
+                    key: key,
                     name: responseData[key].name,
                     age: responseData[key].age,
                     address: responseData[key].address
                 })
             }
-            setDataCustomer(loadCustomer);
+            setDataCustomer(loadedCustomer);
         }
         fetchCustomer();
-    }, [])
+    }, [statusData])
 
-    async function addCustomer(record) {
-        try {
-            await fetch('https://managershopping-dca9a-default-rtdb.firebaseio.com/customer.json', {
-                method: 'POST',
-                body: JSON.stringify({
-                    address: record['address'],
-                    age: record['age'],
-                    key: record['key'],
-                    name: record['name']
-                }),
-                headers: {
-                    'Content-Type:': 'application/json'
-                }
-            });
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
-    const onSaveData = async (record) => {
+    const handleSaveData = async (record) => {
         await addCustomer(record);
+        setStatusData(Math.random());
         setModel({...model, visible: false})
     }
 
-    const onUpdateData = (record) => {
-        const index = dataCustomer.findIndex(data => data.key === record.key);
-        const newData = [...dataCustomer];
-        newData[index] = record;
-        setDataCustomer(newData);
-        setModel({...model, visible: false})
+    const handleUpdateData = async (record) => {
+        const{ key, ...newRecord } = record;
+        await editCustomer(key, newRecord)
+        setStatusData(Math.random());
     }
 
-    const handleDeleteCustomer = (record) => {
-        const newCustomersList = dataCustomer.filter((customer) => {
-            return customer.key !== record.key;
-        });
-        setDataCustomer(newCustomersList);
+    const handleDeleteCustomer = async (key) => {
+        await deleteCustomer(key);
+        setStatusData(Math.random());
     }
 
     return (<>
-        <Button type="primary"
-                style={{marginBottom: '20px'}}
-                onClick={() => setModel({
-                    ...model,
-                    visible: true,
-                    title: 'Add New Customer',
-                    inform: 'Add Successfully',
-                })}
-        >
-            Add New Customer
-        </Button>
-        <ModalCustomer model={model}
-                       onSaveData={onSaveData} onUpdateData={onUpdateData}
-        />
-        <Table dataSource={dataCustomer}
-               columns={columns}/>
-    </>);
+                <Button type="primary"
+                        style={{marginBottom: '20px'}}
+                        onClick={() => setModel({
+                            ...model,
+                            visible: true,
+                            title: 'Add New Customer',
+                            inform: 'Add Successfully',
+                        })}
+                >
+                    Add New Customer
+                </Button>
+                <ModalCustomer model={model}
+                               onSaveData={handleSaveData} onUpdateData={handleUpdateData}
+                />
+                <Table dataSource={dataCustomer}
+                       columns={columns}/>
+            </>);
 };
 
 export default Customer;
+
+
+
