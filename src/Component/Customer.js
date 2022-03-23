@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {createContext, useEffect, useState} from 'react';
 import 'antd/dist/antd.css';
 import '../CSS/EditableTable.css'
 import {Button, Space, Table} from "antd";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import ModalCustomer from "./ModalCustomer";
 import {addCustomer, deleteCustomer, editCustomer} from "../API/requestCustomer";
-
 
 const Customer = () => {
     const columns = [

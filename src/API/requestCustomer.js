@@ -1,3 +1,19 @@
+export const getCustomers = async () =>{
+    const response = await fetch('https://managershopping-dca9a-default-rtdb.firebaseio.com/customers.json');
+    const responseData = await response.json();
+
+    const loadedCustomer = [];
+
+    for (const key in responseData) {
+        loadedCustomer.push({
+            key: key,
+            name: responseData[key].name,
+            age: responseData[key].age,
+            address: responseData[key].address
+        })
+    }
+    return loadedCustomer;
+}
 export const editCustomer = async (key,record) =>{
     try {
         await fetch(`https://managershopping-dca9a-default-rtdb.firebaseio.com/customers/${key}.json`, {

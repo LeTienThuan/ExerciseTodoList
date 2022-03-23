@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import ModalProduct from "./ModalProduct";
 import {addProduct, deleteProduct, editProduct} from "../API/requestProduct";
 
-const formatter = new Intl.NumberFormat('vi-VN', {
+export const formatter = new Intl.NumberFormat('vi-VN', {
     style: 'currency',
     currency: 'VND',
     minimumFractionDigits: 0
