@@ -1,12 +1,11 @@
 import {Button, message, Space, Table} from "antd";
-import ModalAddOrder from "./ModalAddOrder";
+import ModalOrder from "./ModalOrder";
 import {getCustomers} from "../API/requestCustomer";
 import React, {useEffect, useState} from "react";
 import {getProducts} from "../API/requestProduct";
 import {DeleteOutlined, EditOutlined} from "@ant-design/icons";
 import {formatter} from "./Product";
 import {addOrder, deleteOrder, editOrder, getOrders} from "../API/requestOrder";
-import ModalEditOrder from "./ModalEditOrder";
 
 const Order = () => {
     const columns = [
@@ -103,42 +102,41 @@ const Order = () => {
         })
         getOrders().then(orders => setListOrder(orders))
     }, []);
-    const getInforProduct = (key) => {
+
+    const getInformationProduct = (key) => {
         return data.products.filter(product => product.key === key)[0]
     }
-    const getOrder = (record) => {
+    const handleAddOrder = (record) => {
         const newData = [];
         const {customer, products} = record;
         for (let i = 0; i < products.length; i++) {
-            const product = getInforProduct(products[i]);
+            const product = getInformationProduct(products[i]);
             const {name, price, key} = product;
             newData.push({customer, product: name, price, quantity: 1, total: price, key, isChanged: true})
         }
         setListOrder([...listOrder, ...newData]);
     }
     const increaseQuantity = (record) => {
-        let {quantity, total, price} = record;
+        let {quantity, total, price, key} = record;
         quantity++;
         total = price * quantity;
-        const newRecord = {...record, quantity, total, price}
         const newListOrder = listOrder.map(order => {
-            if (order.key === newRecord.key) {
-                order['quantity'] = newRecord['quantity'];
-                order['total'] = newRecord['total'];
+            if (order.key === key) {
+                order['quantity'] = quantity;
+                order['total'] = total
             }
             return order;
         })
         setListOrder(newListOrder)
     }
     const decreaseQuantity = (record) => {
-        let {quantity, total, price} = record;
+        let {quantity, total, price, key} = record;
         quantity > 1 ? quantity-- : quantity = 1;
         total = price * quantity;
-        const newRecord = {...record, quantity, total, price}
         const newListOrder = listOrder.map(order => {
-            if (order.key === newRecord.key) {
-                order['quantity'] = newRecord['quantity'];
-                order['total'] = newRecord['total'];
+            if (order.key === key) {
+                order['quantity'] = quantity;
+                order['total'] = total;
             }
             return order;
         })
@@ -151,17 +149,18 @@ const Order = () => {
                 await addOrder(order);
             }
         }
-        message.success('Add Successfully')
-        setListOrder(prevState => [...prevState])
+        message.success('Save Successfully')
+        await getOrders().then(orders => setListOrder(orders));
     }
     const handleEditOrder = async (record) => {
         const {key} = record;
         await editOrder(key, record);
         setModel({...model, visible: false})
+        await getOrders().then(orders => setListOrder(orders));
     }
     const handleRemoveOrder = async (key) => {
         await deleteOrder(key);
-        setListOrder(prevState => [...prevState]);
+        await getOrders().then(orders => setListOrder(orders));
     }
 
     return (<>
@@ -177,8 +176,7 @@ const Order = () => {
         >
             Save
         </Button>
-        <ModalAddOrder getOrder={getOrder} data={data} model={model}/>
-        <ModalEditOrder onEdit={handleEditOrder} data={data} model={model}/>
+        <ModalOrder onAddOrder={handleAddOrder} onEditOrder={handleEditOrder} data={data} model={model}/>
         <Table columns={columns} dataSource={listOrder}/>
     </>)
 }

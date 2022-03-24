@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Form, InputNumber, Select} from "antd";
 
 const {Option} = Select;
@@ -12,28 +12,29 @@ const layout = {
 };
 
 const FormEditOrder = (props) => {
-    const {form, data, record, onEdit} = props;
-    console.log(record)
-    const {customer, product, quantity, price, total, key} = record;
+    const {form, data, record} = props;
+    const[orderDetail, setOrderDetail] = useState(record);
     const {customers, products} = data;
 
-    const handleSelect = (key) => {
-        form.setFieldsValue({Customers: key})
-    }
-    const handleOnchangeQuantity = () =>{
-        const record = form.getFieldsValue();
-        let {quantity, price, total} = record;
-        total = price * quantity;
-        return {...record, quantity, price, total, key};
-    }
-    useEffect(() =>{
+    useEffect(()=>{
+        setOrderDetail(record)
+        const {customer, product, quantity, price, total} = orderDetail;
         form.setFieldsValue({customer, product, price, total, quantity})
-    },[record])
-
+    })
+    const handleOnChangeQuantity = () =>{
+        const quantity = form.getFieldValue('quantity');
+        console.log(quantity)
+        if(quantity !== null){
+            let {price, total} = orderDetail;
+            total = price * quantity;
+            form.setFieldsValue({total})
+        }
+    }
+    console.log('render')
     return (
         <Form {...layout} form={form} labelAlign={'left'}>
             <Form.Item label='Customer' name='customer' rules={[{required: true}]}>
-                <Select value={customer}  onChange={handleSelect}>
+                <Select>
                     {customers.map(customer => {
                         return <Option key={customer['key']}
                                        value={customer['name']}
@@ -45,7 +46,7 @@ const FormEditOrder = (props) => {
                 </Select>
             </Form.Item>
             <Form.Item label='Product' name='product' rules={[{required: true}]}>
-                <Select onChange={handleSelect}>
+                <Select>
                     {products.map(product => {
                         return <Option key={product['key']}
                                        value={product['key']}
@@ -56,7 +57,7 @@ const FormEditOrder = (props) => {
                 </Select>
             </Form.Item>
             <Form.Item label='Quantity' name='quantity' rules={[{required: true}]}>
-                <InputNumber onChange={handleOnchangeQuantity}/>
+                <InputNumber onChange={handleOnChangeQuantity}/>
             </Form.Item>
             <Form.Item label='Price' name='price'>
                 <InputNumber readOnly={true}/>
