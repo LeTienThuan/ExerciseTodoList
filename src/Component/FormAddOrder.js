@@ -1,7 +1,7 @@
-import {Form, Input, InputNumber, Select} from "antd";
+import {Form, Select} from "antd";
 const {Option} = Select;
 
-const FormOrder = (props) => {
+const FormAddOrder = (props) => {
     const {data, form} = props;
     const {customers, products}  = data;
 
@@ -37,4 +37,4 @@ const FormOrder = (props) => {
     );
 };
 
-export default FormOrder;
+export default FormAddOrder;

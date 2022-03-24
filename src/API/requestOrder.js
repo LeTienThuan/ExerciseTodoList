@@ -36,3 +36,17 @@ export const  deleteOrder = async (key) =>{
         method: 'DELETE'
     })
 }
+export const editOrder = async (key,record) =>{
+    try {
+        await fetch(`https://managershopping-dca9a-default-rtdb.firebaseio.com/orders/${key}.json`, {
+            method: 'PUT',
+            body: JSON.stringify(record),
+            headers: {
+
+                'Content-Type': 'application/json'
+            }
+        });
+    } catch (e) {
+        console.log(e)
+    }
+}

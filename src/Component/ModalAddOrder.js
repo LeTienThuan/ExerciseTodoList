@@ -1,8 +1,8 @@
 import React from 'react';
 import {Form, Modal} from "antd";
-import FormOrder from "./FormOrder";
+import FormAddOrder from "./FormAddOrder";
 
-const ModalOrder = (props) => {
+const ModalAddOrder = (props) => {
     const [form] = Form.useForm();
     const {model, data, getOrder} = props;
     const {visible, onCancel, title} = model;
@@ -18,9 +18,9 @@ const ModalOrder = (props) => {
                onOk={handleOk}
                title={title}
         >
-            <FormOrder data={data} form={form}/>
+            <FormAddOrder data={data} form={form}/>
         </Modal>
     );
 };
 
-export default ModalOrder;
+export default ModalAddOrder;
