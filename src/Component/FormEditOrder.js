@@ -23,14 +23,13 @@ const FormEditOrder = (props) => {
     })
     const handleOnChangeQuantity = () =>{
         const quantity = form.getFieldValue('quantity');
-        console.log(quantity)
         if(quantity !== null){
             let {price, total} = orderDetail;
             total = price * quantity;
             form.setFieldsValue({total})
         }
     }
-    console.log('render')
+
     return (
         <Form {...layout} form={form} labelAlign={'left'}>
             <Form.Item label='Customer' name='customer' rules={[{required: true}]}>
